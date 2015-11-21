@@ -1,35 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void main()
 {
-	int i=0,a[4],x[4],n=1,j,z,y=0;
+	int a[10],x[10],i,j=0,n,q,l=4,kr,bk; // ако l се въвежда от потребителя може да се избира колко дълго да е генерираното число (макс. 10 цифри)
+	/**/printf("Kolko dalgo da e chisloto?\n");
+	scanf("%d",&l);
+	while(l>10 || l<1)
+	{
+		printf("Maksimalnata dalzina e 10 tsifri.\nKolko dalgo da e chisloto?");
+		scanf("%d",&l);
+	}/**/
 	do
 	{
-		srand(time(NULL)+y);
-		for(i=0;i<4;i++)
-			a[i]=rand() %10;
-		y++;
+		srand(time(NULL)+j);
+		for(i=0;i<l;i++)
+			a[i]=rand()%10;
 		n=0;
 		if(a[0]==0)
 			n=1;
-		for(j=0;n==0 && j<4;j++)
-			for(z=1;n==0 && j+z<4;z++)
-				if(a[j]==a[j+z])
+		for(i=0;i<l && n==0;i++)
+			for(q=l-1;q>i && n==0;q--)
+				if(a[i]==a[q])
 					n=1;
-	}while(n=1);
-	for(i=0;i<4;i++)
-		printf("\n%d",a[i]);
-	while(a[0]!=x[0] && a[1]!=x[1] && a[2]!=x[2] && a[3]!=x[3])
+		j++;
+		for(i=0;i<l;i++)
+			printf("%d",a[i]);
+		printf("\n");
+	}while(n==1);
+	printf("Namislih si chislo. Opitai se da go poznaesh!\n");
+	while(1)
 	{
-		scanf("%d",&n);
-		for(i=0;i<4;i++)
+		for(i=0;i<l;i++)
+			scanf("%1d",&x[i]);
+		kr=0;
+		bk=0;
+		for(i=0;i<l;i++)
+			if(x[i]==a[i])
+				bk++;
+		if(bk==l)
 		{
-			x[3-i]=n%10;
-			n/=10;
+			printf("Pozdravlenia, pozna!\n");
+			break;
 		}
-		for(i=0;i<4;i++)		//zameni s broia na kravite i bikovete
-		printf("\n%d",x[i]);
+		for(i=0;i<l;i++)
+			for(j=0;j<l;j++)
+				if(x[i]==a[j])
+				{
+					kr++;
+					break;
+				}
+		kr-=bk;
+		printf("%d bika i %d kravi.\n",bk,kr);
 	}
-	printf("\nBRAVO!");
 }
