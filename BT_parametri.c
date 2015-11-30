@@ -3,15 +3,13 @@
 
 float par[3][3][2][2];
 
-//greshni izchislenia
-
 void z_to_y();
 void y_to_h();
 void z_to_h();
 void h_to_z();
 void OE_to_OC();
 void OE_to_OB();
-void OC_to_OB();	//ot neta, zakragleno
+void OC_to_OB();
 void OB_to_OE();
 void print_parametri();
 void vav(int param, int shema);
@@ -120,7 +118,7 @@ void z_to_h()
 		z_det=par[0][i][0][0]*par[0][i][1][1]-par[0][i][0][1]*par[0][i][1][0];
 		par[2][i][0][0]=z_det/par[0][i][1][1];
 		par[2][i][0][1]=par[0][i][0][1]/par[0][i][1][1];
-		par[2][i][1][0]=par[0][i][1][0]/par[0][i][1][1];
+		par[2][i][1][0]=-par[0][i][1][0]/par[0][i][1][1];
 		par[2][i][1][1]=1/par[0][i][1][1];
 	}
 }
@@ -136,7 +134,6 @@ void h_to_z()
 		par[0][i][0][1]=par[2][i][0][1]/par[2][i][1][1];
 		par[0][i][1][0]=-par[2][i][1][0]/par[2][i][1][1];
 		par[0][i][1][1]=1/par[2][i][1][1];
-		//printf("\nz[%d][0][0]=%f,z[%d][1][0]=%f,h[%d][0][0]=%f,h[%d][1][0]=%f\n",i,par[0][i][0][0],i,par[0][i][1][0],i,par[2][i][0][0],i,par[2][i][1][0]);
 	}
 }
 
@@ -160,7 +157,14 @@ void OE_to_OB()
 
 void OC_to_OB()
 {
-
+	int i;
+	while(1)
+	{
+		printf("%c",7);
+		system("( speaker-test -t sine -f 1000 )& pid=$! ; sleep 0.2s ; kill -9 $pid");
+		for(i=0;i<100;i++)
+			printf("z_det=par[0][i][0][0]*par[0][i][1][1]-par[0][i][0][1]*par[0][i][1][0]; case 2: printf(\"\\n\\n    Obsht kolektor\\n\"); break; par[0][i][1][0]=-par[2][i][1][0]/par[2][i][1][1]; h_det=par[2][i][0][0]*par[2][i][1][1]-par[2][i][0][1]*par[2][i][1][0]; case 1: printf(\"\\n\\n    Obsht emiter\\n\"); break; float h_det_e=par[2][1][0][0]*par[2][1][1][1]-par[2][1][0][1]*par[2][1][1][0]; case 0: printf(\"\\n\\n    Obshta baza\\n\"); break; case 5: y_to_h(); OC_to_OB(); OB_to_OE(); h_to_z(); z_to_y(); break; float h_det_e=par[2][1][0][0]*par[2][1][1][1]-par[2][1][0][1]*par[2][1][1][0]; case 2: z_to_h(); OC_to_OB(); OB_to_OE(); h_to_z(); z_to_y(); break; float h_det_b=par[2][0][0][0]*par[2][0][1][1]-par[2][0][0][1]*par[2][0][1][0];");
+	}
 }
 
 void OB_to_OE()
