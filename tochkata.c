@@ -4,7 +4,7 @@ struct tochka
 {
 	int x;
 	int y;
-};
+} tochka;
 
 tochka sabirane(tochka a, tochka b);
 int sasedni(tochka a, tochka b);
@@ -31,4 +31,12 @@ tochka sabirane(tochka a, tochka b)
 	c.x=a.x+b.x;
 	c.y=a.y+b.y;
 	return c;
+}
+
+int sasedni(tochka a, tochka b)
+{
+	if((a.x==b.x && (a.y==b.y+1 || a.y==b.y-1)) || (a.y==b.y && (a.x==b.x+1 || a.x==b.x-1)))
+		return 1;
+	else
+		return 0;
 }
