@@ -2,16 +2,26 @@
 
 int main()
 {
-	int input, position=1, digit, output=0;
-	printf("Vavedi chislo: ");
-	scanf("%d",&input);
-	while(input!=0)
+	int n, i, j=0;
+	short unsigned octal[50];
+	printf("Vavedi chislo: \n");
+	scanf("%d",&n);
+	for(i=0;n!=0;i++)
 	{
-		digit=input%8;
-		output+=digit*position;
-		position*=10;
-		input/=8;
+		octal[i]=n%8;
+		n/=8;
 	}
-	printf("%d\n",output);
-	return 0;
+	i--;
+	while(i>j)
+	{
+		if(octal[i]!=octal[j])
+		{
+			printf("Tova chislo ne e palindrom.\n");
+			return 0;
+		}
+		i--;
+		j++;
+	}
+	printf("Tova chislo e palindrom.\n");
+	return 1;
 }
