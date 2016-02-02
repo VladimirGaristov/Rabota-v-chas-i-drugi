@@ -6,7 +6,7 @@ void kodirane(int kod_dekod);
 void conf_rotors();
 int conf_plugboard();
 
-unsigned short int plugboard[256], left_rotor, center_rotor, right_rotor,
+unsigned short int plugboard[256], left_rotor=0, center_rotor=1, right_rotor=2,
 				   left_rotor_offset=0, center_rotor_offset=0, right_rotor_offset=0,
 				   initial_left_rotor_offset=0, initial_center_rotor_offset=0,
 				   initial_right_rotor_offset=0, rotors[5][256];
@@ -55,8 +55,9 @@ void kodirane(int kod_dekod)
 	while(!feof(input))
 	{
 		fread(&current_letter, sizeof(unsigned char), 1, input);
+		printf("\n%d---",current_letter);
 		if(kod_dekod==0)
-			current_letter=rotors[left_rotor][(left_rotor_offset+rotors[center_rotor][(center_rotor_offset+rotors[right_rotor][(right_rotor_offset+plugboard[(unsigned short int)current_letter])%256])%256])%256];
+			current_letter=(unsigned char)rotors[left_rotor][(left_rotor_offset+rotors[center_rotor][(center_rotor_offset+rotors[right_rotor][(right_rotor_offset+plugboard[(int)current_letter])%256])%256])%256];
 		else
 		{
 			c=(unsigned short int)current_letter;
@@ -76,6 +77,7 @@ void kodirane(int kod_dekod)
 		center_rotor_offset%=256;
 		right_rotor_offset++;
 		right_rotor_offset%=256;
+		printf("%d", current_letter);
 		fwrite(&current_letter, sizeof(unsigned char), 1, output);
 	}
 	//truncate(output, sizeof(char));
@@ -115,6 +117,7 @@ void conf_rotors()
 	printf("Zavartian na: ");
 	scanf("%hu", &initial_right_rotor_offset);
 	initial_right_rotor_offset%=256;
+	right_rotor_offset=initial_right_rotor_offset;
 }
 
 int conf_plugboard()
