@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 void kodirane();
 
@@ -79,8 +78,8 @@ void kodirane()
 {
 	unsigned short int j, c;
 	FILE *input, *output;
-	input=fopen("input.wtf","r");
-	output=fopen("output.wtf","w");
+	input=fopen("input.txt","r");
+	output=fopen("output.txt","w");
 	while(!feof(input))
 	{
 		fread(&current_letter, sizeof(unsigned char), 1, input);
@@ -107,7 +106,6 @@ void kodirane()
 		right_rotor_offset%=26;
 		fwrite(&current_letter, sizeof(unsigned char), 1, output);
 	}
-	//truncate(output, sizeof(char));
 	fclose(input);
 	fclose(output);
 }

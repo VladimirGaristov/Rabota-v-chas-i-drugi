@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 void kodirane(int kod_dekod);
 void conf_rotors();
@@ -27,7 +26,6 @@ int main()
 	fclose(plugboard_conf_file);
 	while(1)
 	{
-		system("clear");
 		printf("\nVavedi 'K' za kodirane, 'D' za dekodirane, 'R' za konfigurirane na rotorite,");
 		printf("\n'P' za konfigurirane na panela ili 'I' za izhod: ");
 		c=getchar();
@@ -47,8 +45,8 @@ void kodirane(int kod_dekod)
 	unsigned char current_letter;
 	unsigned short int j, c;
 	FILE *input, *output;
-	input=fopen("input.wtf","r");
-	output=fopen("output.wtf","w");
+	input=fopen("input.txt","r");
+	output=fopen("output.txt","w");
 	left_rotor_offset=initial_left_rotor_offset;
 	center_rotor_offset=initial_center_rotor_offset;
 	right_rotor_offset=initial_right_rotor_offset;
@@ -80,7 +78,6 @@ void kodirane(int kod_dekod)
 		printf("%d", current_letter);
 		fwrite(&current_letter, sizeof(unsigned char), 1, output);
 	}
-	//truncate(output, sizeof(char));
 	fclose(input);
 	fclose(output);
 }
